@@ -5,5 +5,6 @@
 * bin/console
 * bin/console debug:autowiring
 * bin/console debug:autowiring | grep session
+* composer require annotations
 
 
