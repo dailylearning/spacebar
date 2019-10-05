@@ -4,6 +4,7 @@ namespace App\Controller;
 use Michelf\MarkdownInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +25,7 @@ class ArticleController extends AbstractController
      * @Route("/news/{slug}", name="app_article_show")
      * @return Response
      */
-    public function show($slug, Environment $twig, MarkdownInterface $markdown)
+    public function show($slug, Environment $twig, MarkdownInterface $markdown, AdapterInterface $cache)
     {
         $comments = [
             'Hello, Juyal! You have 10 unread messages',
@@ -57,13 +58,19 @@ exercitation eiusmod. Exercitation incididunt rump laborum, t-bone short ribs bu
 bresaola shoulder burgdoggen fugiat. Adipisicing nostrud chicken consequat beef ribs, quis filet mignon do.
 Prosciutto capicola mollit shankle aliquip do dolore hamburger brisket turducken eu.
 
-Do mollit deserunt prosciutto laborum. Duis sint tongue quis nisi. Capicola qui beef ribs dolore pariatur.
+Do mollit deserunt **prosciutto** laborum. Duis sint tongue quis nisi. Capicola qui beef ribs dolore pariatur.
 Minim strip steak fugiat nisi est, meatloaf pig aute. Swine rump turducken nulla sausage. Reprehenderit pork
 belly tongue alcatra, shoulder excepteur in beef bresaola duis ham bacon eiusmod. Doner drumstick short loin,
 adipisicing cow cillum tenderloin.
 EOF;
 
-        $articleContent = $markdown->transform($articleContent);
+        $item = $cache->getItem('markdown_' . md5($articleContent));
+        if ( !$item->isHit() ) {
+            $item->set($markdown->transform($articleContent));
+            $cache->save($item);
+        }
+
+        $articleContent = $item->get();
 
         $html = $twig->render('article/show.html.twig', [
             'title' => ucwords(str_replace('-', ' ', $slug)),

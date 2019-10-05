@@ -4,3 +4,5 @@
 #### 02
 * composer require knplabs/knp-markdown-bundle
 * bin/console debug:autowiring | grep markdown
+#### 03
+* bin/console debug:autowiring | grep cache
