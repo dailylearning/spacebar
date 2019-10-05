@@ -33,3 +33,9 @@
 * ---
 #### 12
 * bin/console debug:router
+#### 13
+* tail -f var/log/dev.log
+* bin/console debug:autowiring
+* bin/console debug:autowiring | grep logger
+* bin/console debug:autowiring | grep twig
+
