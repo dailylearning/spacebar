@@ -21,4 +21,6 @@
 * ---
 #### 07
 * composer require profiler --dev #symfony/profiler-pack
-
+#### 08
+* composer require debug --dev #symfony/debug-pack
+* composer unpack debug
