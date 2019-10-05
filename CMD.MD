@@ -27,4 +27,6 @@
 #### 09
 * rm -rf var/cache/dev/*
 * composer require asset #symfony/asset
+#### 10
+* bin/console debug:router
 
