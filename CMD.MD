@@ -24,3 +24,7 @@
 #### 08
 * composer require debug --dev #symfony/debug-pack
 * composer unpack debug
+#### 09
+* rm -rf var/cache/dev/*
+* composer require asset #symfony/asset
+
