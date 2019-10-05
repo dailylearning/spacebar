@@ -19,3 +19,6 @@
 * composer require twig #symfony/twig-bundle
 #### 06
 * ---
+#### 07
+* composer require profiler --dev #symfony/profiler-pack
+
