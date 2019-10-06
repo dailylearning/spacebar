@@ -27,6 +27,8 @@ class ArticleController extends AbstractController
      */
     public function show($slug, Environment $twig, MarkdownInterface $markdown, AdapterInterface $cache)
     {
+        dump($markdown);
+        die;
         $comments = [
             'Hello, Juyal! You have 10 unread messages',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',

@@ -6,3 +6,8 @@
 * bin/console debug:autowiring | grep markdown
 #### 03
 * bin/console debug:autowiring | grep cache
+#### 04
+* bin/console config:dump KnpMarkdownBundle
+* bin/console cache:clear
+* bin/console config:dump TwigBundle
+* bin/console config:dump twig
